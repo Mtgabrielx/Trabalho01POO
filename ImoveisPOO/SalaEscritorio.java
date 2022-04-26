@@ -11,6 +11,7 @@ public class SalaEscritorio {
     private boolean salaReuniaoComunitaria;
     private boolean ativo;
 
+    // Metodo Construtor
     public SalaEscritorio(float area, String bairro, String cidade, String tipoContrato, String valorContrato, int codigo, boolean internet, boolean salaReuniaoComunitaria){
         setArea(area);
         setBairro(bairro);
@@ -23,6 +24,7 @@ public class SalaEscritorio {
         setAtivo(true);
     }
 
+    // Metodo para alterar valores de um salaEscritorio
     public void Alterar(float area, String bairro, String cidade, String tipoContrato, String valorContrato, int codigo, boolean internet, boolean salaReuniaoComunitaria, boolean estaAtivo){
         setArea(area);
         setBairro(bairro);

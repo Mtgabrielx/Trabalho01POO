@@ -12,35 +12,8 @@ class ConjuntoApartamento extends Agencia {
     }
 
     @Override
-    public void Incluir(){
+    public void Incluir(float area, String bairro, String cidade, String tipoContrato, String valorContrato, int codigo, String quarto, String banheiro, String vagaAutomovel){
         if(getTotalVagas() != getVagasOcupadas()){
-            System.out.println("area: ");
-            float area = (float) Util.readDbl();
-
-            System.out.println("bairro: ");
-            String bairro = Util.readStr();
-
-            System.out.println("cidade: ");
-            String cidade = Util.readStr();
-
-            System.out.println("Tipo contrato: ");
-            String tipoContrato = Util.readStr();
-
-            System.out.println("Valor contrato: ");
-            String valorContrato = Util.readStr();
-
-            System.out.println("codigo: ");
-            int codigo = Util.readInt();
-
-            System.out.println("Quantidade de quartos: ");
-            String quarto = Util.readStr();
-
-            System.out.println("Quantidade de banheiros: ");
-            String banheiro = Util.readStr();
-
-            System.out.println("Quantidade de vagas de automovel: ");
-            String vagaAutomovel = Util.readStr();
-
             conjuntoApartamento[getVagasOcupadas()] = new Apartamento(area, bairro, cidade, tipoContrato, valorContrato, codigo, quarto, banheiro, vagaAutomovel);
             setVagasOcupadas(getVagasOcupadas()+1);
             setPromocoesAtivas(getPromocoesAtivas()+1);
@@ -52,41 +25,7 @@ class ConjuntoApartamento extends Agencia {
     }
 
     @Override
-    public void Alterar(){
-        System.out.println("Qual o código do apartamento?");
-        int codigoApartamento = Util.readInt();
-
-        System.out.println("area: ");
-        float area = (float) Util.readDbl();
-
-        System.out.println("bairro: ");
-        String bairro = Util.readStr();
-
-        System.out.println("cidade: ");
-        String cidade = Util.readStr();
-
-        System.out.println("Tipo contrato: ");
-        String tipoContrato = Util.readStr();
-
-        System.out.println("Valor contrato: ");
-        String valorContrato = Util.readStr();
-
-        System.out.println("codigo: ");
-        int codigo = Util.readInt();
-
-        System.out.println("Quantidade de quartos: ");
-        String quarto = Util.readStr();
-
-        System.out.println("Quantidade de banheiros: ");
-        String banheiro = Util.readStr();
-
-        System.out.println("Quantidade de vagas de automovel: ");
-        String vagaAutomovel = Util.readStr();
-
-        System.out.println("Está ativo?(true/false)");
-        String vendido = Util.readStr();
-        boolean estaAtivo = vendido.equals("true");
-
+    public void Alterar(int codigoApartamento, float area, String bairro, String cidade, String tipoContrato, String valorContrato, int codigo, String quarto, String banheiro, String vagaAutomovel, boolean estaAtivo){
         int contador = 0;
         boolean existe = false;
         while(!existe && contador < getVagasOcupadas()){
@@ -104,7 +43,7 @@ class ConjuntoApartamento extends Agencia {
     }
 
     @Override
-    public void Remover(){
+    public void Remover(ConjuntoApartamento apartamento){
         System.out.println("Informe o codigo do apartamento a ser removido");
         int codigo = Util.readInt();
         int contador = 0;
@@ -136,7 +75,8 @@ class ConjuntoApartamento extends Agencia {
         }
     }
 
-    @Override
+
+   // @Override
     public void AtivoDesativo(){
         System.out.println("Digite o valor do Codigo: ");
         int codigo = Util.readInt();
@@ -158,6 +98,7 @@ class ConjuntoApartamento extends Agencia {
         }
     }
 
+   // encontra apartamentos com o tipo de contrato locacao
     public int encontrarLocacao(){
         int contador = 0;
         int resultado = 0;
@@ -170,6 +111,7 @@ class ConjuntoApartamento extends Agencia {
         return resultado;
     }
 
+    // encontra apartamentos com o tipo de contrato venda
     public int encontrarVenda(){
         int contador = 0;
         int resultado = 0;
@@ -180,6 +122,18 @@ class ConjuntoApartamento extends Agencia {
             contador++;
         }
         return resultado;
+    }
+
+    @Override
+    public int vendaLocacaoAtiva(){
+        int contador = 0, totalOfertas = 0;
+        while (contador < this.getVagasOcupadas()){
+            if(this.conjuntoApartamento[contador].getAtivo()){
+                totalOfertas++;
+            }
+            contador++;
+        }
+        return totalOfertas;
     }
 
     public int getTotalVagas() {

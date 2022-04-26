@@ -12,34 +12,8 @@ public class ConjuntoEscritorio extends Agencia{
     }
 
     @Override
-    public void Incluir(){
+    public void Incluir(float area, String bairro, String cidade, String tipoContrato, String valorContrato, int codigo, boolean existeInternet, boolean existeSalaReunioes){
         if(getTotalVagas() != getVagasOcupadas()){
-            System.out.println("area: ");
-            float area = (float) Util.readDbl();
-
-            System.out.println("bairro: ");
-            String bairro = Util.readStr();
-
-            System.out.println("cidade: ");
-            String cidade = Util.readStr();
-
-            System.out.println("Tipo contrato: ");
-            String tipoContrato = Util.readStr();
-
-            System.out.println("Valor contrato: ");
-            String valorContrato = Util.readStr();
-
-            System.out.println("codigo: ");
-            int codigo = Util.readInt();
-
-            System.out.println("Sala de reunioes(true/false): ");
-            String reunioes = Util.readStr();
-            boolean existeSalaReunioes = reunioes.equals("true");
-
-            System.out.println("Internet(true/false): ");
-            String internet = Util.readStr();
-            boolean existeInternet = reunioes.equals("true");
-
             conjuntoSalaEscritorio[getVagasOcupadas()] = new SalaEscritorio(area, bairro, cidade, tipoContrato, valorContrato, codigo, existeInternet, existeSalaReunioes);
             setPromocoesAtivas(getPromocoesAtivas()+1);
             setVagasOcupadas(getVagasOcupadas()+1);
@@ -50,42 +24,10 @@ public class ConjuntoEscritorio extends Agencia{
     }
 
     @Override
-    public void Alterar(){
-        System.out.println("Qual o código do escritorio?");
-        int codigoEscritorio = Util.readInt();
-
-        System.out.println("area: ");
-        float area = (float) Util.readDbl();
-
-        System.out.println("bairro: ");
-        String bairro = Util.readStr();
-
-        System.out.println("cidade: ");
-        String cidade = Util.readStr();
-
-        System.out.println("Tipo contrato: ");
-        String tipoContrato = Util.readStr();
-
-        System.out.println("Valor contrato: ");
-        String valorContrato = Util.readStr();
-
-        System.out.println("codigo: ");
-        int codigo = Util.readInt();
-
-        System.out.println("Sala de reunioes(true/false): ");
-        String reunioes = Util.readStr();
-        boolean existeSalaReunioes = reunioes.equals("true");
-
-        System.out.println("Internet(true/false): ");
-        String internet = Util.readStr();
-        boolean existeInternet = reunioes.equals("true");
-
-        System.out.println("Está ativo?(true/false)");
-        String vendido = Util.readStr();
-        boolean estaAtivo = vendido.equals("true");
-
+    public void Alterar(int codigoEscritorio, float area, String bairro, String cidade, String tipoContrato, String valorContrato, int codigo, boolean existeInternet, boolean existeSalaReunioes, boolean estaAtivo){
         int contador = 0;
         boolean existe = false;
+
         while(!existe && contador < getVagasOcupadas()){
             if(conjuntoSalaEscritorio[contador].getCodigo() == codigoEscritorio){
                 existe = true;
@@ -101,7 +43,7 @@ public class ConjuntoEscritorio extends Agencia{
     }
 
     @Override
-    public void Remover(){
+    public void Remover(ConjuntoEscritorio escritorio){
         System.out.println("Digite o codigo do escritório");
         int codigo = Util.readInt();
         int contador = 0;
@@ -130,7 +72,8 @@ public class ConjuntoEscritorio extends Agencia{
         }
     }
 
-    @Override
+
+    //@Override
     public void AtivoDesativo(){
         System.out.println("Digite o número do Codigo: ");
         int codigo = Util.readInt();
@@ -153,6 +96,7 @@ public class ConjuntoEscritorio extends Agencia{
         }
     }
 
+    //encontra o tipo proposta de locacao
     public int encontrarLocacao(){
         int contador = 0;
         int resultado = 0;
@@ -165,6 +109,7 @@ public class ConjuntoEscritorio extends Agencia{
         return resultado;
     }
 
+    //encontra o tipo proposta de locacao
     public int encontrarVenda(){
         int contador = 0;
         int resultado = 0;
@@ -177,22 +122,29 @@ public class ConjuntoEscritorio extends Agencia{
         return resultado;
     }
 
+    //Define um vetor lista informando se uma sala foi ou não vendida
     public String[] salaComercializada(){
         int contador;
-        String[] resultado =new String[this.getTotalVagas()];
+        String[] resultado = new String[this.getTotalVagas()];
         for(contador = 0; contador < this.getVagasOcupadas(); contador++){
-            if(this.conjuntoSalaEscritorio[contador].getAtivo()){
-                resultado[contador] = "Não vendido";
+            resultado[contador] = ("Sala de código" + this.conjuntoSalaEscritorio[contador].getCodigo());
+            if(!this.conjuntoSalaEscritorio[contador].getAtivo()){
+                resultado[contador] = " vendido";
             }
-            else{
-                resultado[contador] = "vendido";
-            }
-        }
-        while (contador < this.getTotalVagas()){
-            resultado[contador] = "Não Anuciado";
-            contador++;
         }
         return resultado;
+    }
+
+    @Override
+    public int vendaLocacaoAtiva(){
+        int contador = 0, totalOfertas = 0;
+        while (contador < this.getVagasOcupadas()){
+            if(this.conjuntoSalaEscritorio[contador].getAtivo()){
+                totalOfertas++;
+            }
+            contador++;
+        }
+        return totalOfertas;
     }
 
     public int getTotalVagas() {

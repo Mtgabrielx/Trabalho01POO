@@ -1,42 +1,38 @@
 package ImoveisPOO;
 
-public class Apartamento {
+public class SalaEscritorio {
     private float area;
     private String bairro;
     private String cidade;
     private String tipoContrato;
     private String valorContrato;
     private int codigo;
-    private String quarto;
-    private String banheiro;
-    private String vagaAutomovel;
+    private boolean internet;
+    private boolean salaReuniaoComunitaria;
     private boolean ativo;
 
-    //Construtor
-    public Apartamento(float area, String bairro, String cidade, String tipoContrato, String valorContrato, int codigo, String quarto, String banheiro, String vagaAutomovel){
+    public SalaEscritorio(float area, String bairro, String cidade, String tipoContrato, String valorContrato, int codigo, boolean internet, boolean salaReuniaoComunitaria){
         setArea(area);
         setBairro(bairro);
-        setBanheiro(banheiro);
         setCidade(cidade);
         setCodigo(codigo);
-        setQuarto(quarto);
         setTipoContrato(tipoContrato);
-        setVagaAutomovel(vagaAutomovel);
         setValorContrato(valorContrato);
+        setSalaReuniaoComunitaria(salaReuniaoComunitaria);
+        setInternet(internet);
         setAtivo(true);
     }
 
-    // altera os dados
-    public void Alterar(float area, String bairro, String cidade, String tipoContrato, String valorContrato, int codigo, String quarto, String banheiro, String vagaAutomovel, boolean ativo){
+    public void Alterar(float area, String bairro, String cidade, String tipoContrato, String valorContrato, int codigo, boolean internet, boolean salaReuniaoComunitaria, boolean estaAtivo){
         setArea(area);
         setBairro(bairro);
-        setBanheiro(banheiro);
         setCidade(cidade);
         setCodigo(codigo);
-        setQuarto(quarto);
         setTipoContrato(tipoContrato);
         setValorContrato(valorContrato);
-        setAtivo(ativo);
+        setSalaReuniaoComunitaria(salaReuniaoComunitaria);
+        setInternet(internet);
+        setAtivo(estaAtivo);
     }
 
     public float getArea() {
@@ -87,28 +83,20 @@ public class Apartamento {
         this.codigo = codigo;
     }
 
-    public String getQuarto() {
-        return quarto;
+    public boolean isInternet() {
+        return internet;
     }
 
-    public void setQuarto(String quarto) {
-        this.quarto = quarto;
+    public void setInternet(boolean internet) {
+        this.internet = internet;
     }
 
-    public String getBanheiro() {
-        return banheiro;
+    public boolean isSalaReuniaoComunitaria() {
+        return salaReuniaoComunitaria;
     }
 
-    public void setBanheiro(String banheiro) {
-        this.banheiro = banheiro;
-    }
-
-    public String getVagaAutomovel() {
-        return vagaAutomovel;
-    }
-
-    public void setVagaAutomovel(String vagaAutomovel) {
-        this.vagaAutomovel = vagaAutomovel;
+    public void setSalaReuniaoComunitaria(boolean salaReuniaoComunitaria) {
+        this.salaReuniaoComunitaria = salaReuniaoComunitaria;
     }
 
     public boolean getAtivo(){
@@ -119,3 +107,4 @@ public class Apartamento {
         this.ativo = ativo;
     }
 }
+
